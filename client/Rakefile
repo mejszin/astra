@@ -1,0 +1,52 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
+BASE_URL = 'https://mindful.machin.dev/api'
+API_TOKEN = 'U7qTXOOX'
+USER_ID = 'gBwRIOOn'
+
+def post(route, headers = {}, body = nil)
+    uri = URI(BASE_URL + route)
+    uri.query = URI.encode_www_form(headers)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl, http.verify_mode = true, OpenSSL::SSL::VERIFY_NONE
+    req = Net::HTTP::Post.new(uri.request_uri, {'Content-Type': 'application/json'})
+    req.body = body.to_json unless body == nil
+    res = http.request(req)
+    return res.code
+end
+
+def get(route, headers = {})
+    uri = URI(BASE_URL + route)
+    uri.query = URI.encode_www_form(headers)
+    res = Net::HTTP.get_response(uri)
+    begin
+        result = JSON.parse(res.body)
+    rescue
+        result = res.code
+    end
+    return result
+end
+
+task :default do
+    from, to, days = 480, 420, 23
+    list = Array.new(days) { |day| (to + ((from - to) * (1 - day / days.to_f))).round + (rand(12) - 6) }
+    for datapoint in list do
+        # puts get('/projects/entry/datapoint/new', { :token => API_TOKEN, :entry => 'YC96', :dataset => 'mile_times', :value => datapoint })
+    end
+    # data = {
+    #     "type" => "image",
+    #     "time" => 1661097409,
+    #     "source" => "https://lh3.googleusercontent.com/drive-viewer/AJc5JmQKKlxFMQ-KoVZLt6mNSiZP6vII5Dnnucmm4yUHjH2AGM2Oe-laVCOJ-3SaV9FX4OUEOVBIlzE=w2076-h1396"
+    # }
+    # puts get('/projects/entry/feed/new', { :token => API_TOKEN, :entry => 'YC96' }, data)
+end
+
+task :days do
+    require 'date'
+    (0...23).to_a.reverse.each do |i|
+        day = (Date.today - i).strftime('%Y/%m/%d')
+        # puts get('/projects/entry/datapoint/new', { :token => API_TOKEN, :entry => 'YC96', :dataset => 'mile_days', :value => day })
+    end
+end

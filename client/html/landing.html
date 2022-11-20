@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->    
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
+    <script src="../lib/params.js"></script>
+    <script src="../lib/navigation.js"></script>
+  </head>
+  <style>
+      body {
+          display: flex;
+          width: 100vw;
+          height: 100vh;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          background-color: #FFF;
+      }
+
+      @keyframes rotation {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(359deg);
+        }
+      }
+
+      img {
+        height: 50vh;
+        width: auto;
+        animation: rotation 20s infinite linear;
+        cursor: pointer;
+      }
+  </style>
+  <body>
+      <img id="landing-image" src="../data/earth.png">
+  </body>
+  <script>
+    let image = document.getElementById('landing-image');
+    image.onclick = () => {
+      gotoPage('login')
+    };
+  </script>
+</html>

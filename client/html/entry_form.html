@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->    
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/bulma.css"/>
+    <script src="../lib/params.js"></script>
+    <script src="../lib/api.js"></script>
+    <script src="../lib/helpers.js"></script>
+    <script src="../lib/navigation.js"></script>
+  </head>
+  <style>
+    body {
+      border-top: 64px solid #282E38;
+    }
+    .form {
+      height: 100vh;
+      overflow-y: scroll;
+    }
+  </style>
+  <body>
+    <div class="form p-6">
+      <div class="field">
+        <div class="control">
+          <input id="title-input" class="input" type="text" placeholder="Title">
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <input id="tags-input" class="input" type="text" placeholder="Tags">
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <textarea id="description-input" class="textarea" placeholder="Description"></textarea>
+        </div>
+      </div>
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button is-teal is-link" onclick="submitForm()">Submit</button>
+        </div>
+        <div class="control">
+          <button class="button is-light" onclick="gotoPage('tasks')">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function submitForm() {
+      let title = document.getElementById('title-input').value;
+      let description = document.getElementById('description-input').value;
+      let tags = document.getElementById('tags-input').value.split(',');
+      let created_time = Math.floor(Date.now() / 1000);
+      let body = {
+        title: title,
+        description: description,
+        tags: tags,
+        times: {
+          created: created_time
+        }
+      }
+      if (entry_id != null) { body.id = entry_id };
+      newProjectEntry(body).then(() => {
+        gotoPage('tasks');
+      });
+    }
+
+    if (entry_id != null) {
+      getProjectTags().then(tags => {
+        console.log('tags=', tags);
+        getProjectEntries().then(entries => {
+          for (var id in entries) {
+            if (id == entry_id) {
+              console.log('entry=', entries[id]);
+              document.getElementById('title-input').value = entries[id].title;
+              document.getElementById('description-input').value = entries[id].description;
+              let tag_names = [];
+              entries[id].tags.forEach(tag => tag_names.push(tags[tag][0]));
+              document.getElementById('tags-input').value = tag_names.join(',');
+            }
+          }
+        });
+      });
+    }
+  </script>
+</html>

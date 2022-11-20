@@ -1,0 +1,14 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Louis Machin",
+  "dependencies": {
+    "chart.js": "^3.9.1",
+    "electron": "^13.6.3"
+  }
+}

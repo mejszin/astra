@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="183.73898mm"
+   height="88.912148mm"
+   viewBox="0 0 183.73898 88.912148"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.2 (b8e25be833, 2022-02-05)"
+   sodipodi:docname="flowctrl.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.57281845"
+     inkscape:cx="315.10857"
+     inkscape:cy="217.34635"
+     inkscape:window-width="1600"
+     inkscape:window-height="830"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showguides="false" />
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="powermask"
+       id="path-effect2078"
+       is_visible="true"
+       lpeversion="1"
+       uri="#mask-powermask-path-effect2078"
+       invert="false"
+       hide_mask="false"
+       background="true"
+       background_color="#ffffffff" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask-powermask-path-effect2078">
+      <path
+         id="mask-powermask-path-effect2078_box"
+         style="fill:#ffffff;fill-opacity:1"
+         d="M 65.744164,103.15785 H 94.072163 V 131.486 H 65.744164 Z" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13.6791px;line-height:1.25;font-family:'Helvetica Rounded';-inkscape-font-specification:'Helvetica Rounded';fill:#000000;stroke-width:0.341979"
+         x="68.960785"
+         y="121.90064"
+         id="text2076"><tspan
+           sodipodi:role="line"
+           id="tspan2074"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Helvetica Rounded';-inkscape-font-specification:'Helvetica Rounded';fill:#000000;stroke-width:0.341979"
+           x="68.960785"
+           y="121.90064">ctrl</tspan></text>
+    </mask>
+    <filter
+       id="mask-powermask-path-effect2078_inverse"
+       inkscape:label="filtermask-powermask-path-effect2078"
+       style="color-interpolation-filters:sRGB"
+       height="100"
+       width="100"
+       x="-50"
+       y="-50">
+      <feColorMatrix
+         id="mask-powermask-path-effect2078_primitive1"
+         values="1"
+         type="saturate"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         id="mask-powermask-path-effect2078_primitive2"
+         values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(9.3728801,-76.099132)">
+    <text
+       xml:space="preserve"
+       style="font-size:56.5883px;line-height:1.25;font-family:Heartbreaker;-inkscape-font-specification:Heartbreaker;fill:#ffffff;stroke-width:0.663143"
+       x="-12.315472"
+       y="137.94904"
+       id="text2234"><tspan
+         sodipodi:role="line"
+         id="tspan2232"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:56.5883px;font-family:Pacifico;-inkscape-font-specification:Pacifico;fill:#ffffff;stroke-width:0.663143"
+         x="-12.315472"
+         y="137.94904">flow</tspan></text>
+    <path
+       style="fill:#ffffff;stroke:none;stroke-width:0.264583"
+       id="rect7304"
+       width="26.327999"
+       height="26.328148"
+       x="66.744164"
+       y="104.15785"
+       rx="4"
+       mask="url(#mask-powermask-path-effect2078)"
+       inkscape:path-effect="#path-effect2078"
+       d="m 70.744164,104.15785 h 18.327999 c 2.216,0 4,1.784 4,4 V 126.486 c 0,2.216 -1.784,4 -4,4 H 70.744164 c -2.216,0 -4,-1.784 -4,-4 v -18.32815 c 0,-2.216 1.784,-4 4,-4 z"
+       sodipodi:type="rect"
+       transform="matrix(3.3770757,0,0,3.3770757,-139.94563,-275.64982)" />
+  </g>
+</svg>

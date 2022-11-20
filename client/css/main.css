@@ -1,0 +1,53 @@
+.main .scrollarea {
+    overflow-y: scroll;
+    height: calc(100vh - 64px);
+}
+
+.main .column.grid {
+    display: grid !important;
+    height: 100vh;
+    grid-template-rows: auto 1fr;
+}
+
+.main .box.header {
+    border-radius: 0;
+    box-shadow: none;
+    color: white;
+    height: 64px;
+}
+
+.main .box.header.left {
+    background-color: #282E38;
+}
+
+.main .box.header.right {
+    /* background-color: #E76099; */
+    background-color: #30B8B9;
+    display: flex;
+    align-items: center;
+}
+
+.main .box.entry {
+    box-shadow: none;
+    border: 1px solid #8CDCDC;
+    background-color: white;
+    cursor: pointer;
+}
+
+.main .box.entry:hover {
+    border: 1px solid #1F94FA;
+    background-color: #EDF7FF;
+}
+
+.main .box.entry.selected {
+    border: 1px solid #1F94FA;
+    background-color: #EDF7FF;
+}
+
+.main .column.left {
+    background-color: #F4F4F5;
+}
+
+.main .column.right {
+    background-color: white;
+}
