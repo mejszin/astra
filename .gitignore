@@ -1,0 +1,4 @@
+client/node_modules
+server/api/node_modules
+server/api/data/*.json
+scripts/api_token

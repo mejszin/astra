@@ -56,6 +56,7 @@
       return new Promise(resolve => {
         (async () => {
           var url = `${base_url}/user/login?username=${username}&password=${password}`;
+          console.log(url);
           fetch(url).then(response => response.status == 200 ? response.json() : { token: null }).then(data => {
               console.log('/user/login', data);
               resolve(data);
@@ -98,7 +99,7 @@
         <form>
           <input class="input is-normal my-2" id="username-input" type="text" placeholder="Username">
           <input class="input is-normal my-2" id="password-input" type="password" placeholder="Password">
-          <button class="button my-2 is-link" onclick="login()">Login</button>
+          <button class="button my-2" type="button" style="background-color: #127F92; color: white" onclick="login()">Login</button>
         </form>
       </div>
     </div>
