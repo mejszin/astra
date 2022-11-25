@@ -79,7 +79,7 @@ module.exports = function (app) {
             app.locals.newTask(user.id, title, description);
             app.locals.writeTasks();
             // Success
-            res.status(200).send();
+            res.status(200).send({});
         } else {
             // Unauthorized
             res.status(401).send();
@@ -93,7 +93,7 @@ module.exports = function (app) {
             app.locals.deleteTask(task_id);
             app.locals.writeTasks();
             // Success
-            res.status(200).send();
+            res.status(200).send({});
         } else {
             // Unauthorized
             res.status(401).send();
@@ -127,7 +127,7 @@ module.exports = function (app) {
             app.locals.newFeed(task_id, data);
             app.locals.writeTasks();
             // Success
-            res.status(200).send();
+            res.status(200).send({});
         } else {
             // Unauthorized
             res.status(401).send();
@@ -141,7 +141,7 @@ module.exports = function (app) {
             app.locals.deleteFeed(task_id, feed_id);
             app.locals.writeTasks();
             // Success
-            res.status(200).send();
+            res.status(200).send({});
         } else {
             // Unauthorized
             res.status(401).send();

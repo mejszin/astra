@@ -92,7 +92,7 @@ module.exports = function (app) {
                 app.locals.writeUsers();
                 res.status(200).send({ token: token });
             } else {
-                res.status(204).send();
+                res.status(204).send({});
             }
         } else {
             // Bad request

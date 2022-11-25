@@ -18,7 +18,7 @@ module.exports = function (app) {
         if (app.locals.isToken(token)) {
             app.locals.newTag(token, name, color);
             app.locals.writeUsers();
-            res.status(200).send();
+            res.status(200).send({});
         } else {
             // Unauthorized
             res.status(401).send();
