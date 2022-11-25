@@ -40,7 +40,7 @@ module.exports = function (app) {
     }
 
     app.locals.getUser = (token, user_id = null) => {
-        if (token in user_data) {
+        if (token in app.locals.user_data) {
             if (user_id == null) {
                 return app.locals.user_data[token];
             } else {
