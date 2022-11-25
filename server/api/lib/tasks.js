@@ -6,6 +6,7 @@ module.exports = function (app) {
                 result.push(app.locals.task_data[task_id]);
             }
         });
+        return result;
     }
     
     app.locals.newTask = (user_id, title, description) => {
