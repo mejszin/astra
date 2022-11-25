@@ -1,6 +1,6 @@
 require_relative './api.rb'
 
-USERNAME = 'Louis'
-PASSWORD = 'PrettyStock420!'
+USERNAME = ''
+PASSWORD = ''
 
 puts get('/user/new', { :username => USERNAME, :password => PASSWORD })
