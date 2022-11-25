@@ -80,5 +80,9 @@ app.get('/ping', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`It's alive on port ${PORT}!`);
-    console.log(app.routes);
+    app._router.stack.forEach(r => {
+        if (r.route && r.route.path) {
+            console.log(r.route.path);
+        }
+    });
 });
