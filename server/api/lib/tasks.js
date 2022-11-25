@@ -46,7 +46,7 @@ module.exports = function (app) {
     app.locals.newFeed = (task_id, data) => {
         if (task_id in app.locals.task_data) {
             let feed_id = app.locals.randomString();
-            app.locals.task_data.feed[feed_id] = data;
+            app.locals.task_data[task_id].feed[feed_id] = data;
         }
     }
 
