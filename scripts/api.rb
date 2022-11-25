@@ -3,7 +3,7 @@ require 'uri'
 require 'json'
 require_relative './common.rb'
 
-BASE_URL = 'https://mindful.machin.dev/api'
+BASE_URL = 'https://astra.machin.dev/api'
 
 API_TOKEN_BASENAME = '/api_token'
 API_TOKEN_PATH = File.dirname(__FILE__) + API_TOKEN_BASENAME
