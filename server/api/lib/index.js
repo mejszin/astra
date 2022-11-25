@@ -57,4 +57,5 @@ app.get('/ping', (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`It's alive on port ${PORT}!`);
+    console.log(app.routes);
 });

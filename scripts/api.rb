@@ -8,7 +8,7 @@ BASE_URL = 'https://astra.machin.dev/api'
 API_TOKEN_BASENAME = '/api_token'
 API_TOKEN_PATH = File.dirname(__FILE__) + API_TOKEN_BASENAME
 
-VERBOSE = false
+VERBOSE = true
 
 if File.file?(API_TOKEN_PATH)
     API_TOKEN = File.read(API_TOKEN_PATH)
