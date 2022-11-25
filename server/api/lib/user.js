@@ -8,29 +8,6 @@ module.exports = function (app) {
         })
         return exists;
     };
-    
-    app.locals.findCredentials = async (username, password) => {
-        return new Promise((resolve, reject) => {
-            Object.keys(app.locals.user_data).forEach(async function(token) {
-                if (username == app.locals.user_data[token].username) {
-                    const result = await bcrypt.compare(password, app.locals.user_data[token].password.hash);
-                    resolve(result ? token : null);
-                } else {
-                    resolve(null);
-                }
-            });
-        });
-    };
-
-    app.locals.newSaltHash = (password) => {
-        return new Promise((resolve) => {
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(password, salt, function(err, hash) {
-                    resolve([salt, hash]);
-                });
-            });
-        });
-    };
 
     app.locals.isToken = (token) => {
         return (token in app.locals.user_data);
