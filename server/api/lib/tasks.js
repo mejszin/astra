@@ -83,10 +83,10 @@ module.exports = function (app) {
     app.locals.deleteVariable = (task_id, key) => {
         if (task_id in app.locals.task_data) {
             if (key in app.locals.task_data[task_id].variables) {
-                return false;
-            } else {
                 delete app.locals.task_data[task_id].variables[key];
                 return true;
+            } else {
+                return false;
             }
         } else {
             return false;

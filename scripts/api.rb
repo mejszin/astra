@@ -27,7 +27,7 @@ def post(route, headers = {}, body = nil)
     req = Net::HTTP::Post.new(uri.request_uri, {'Content-Type': 'application/json'})
     req.body = body.to_json unless body == nil
     res = http.request(req)
-    return res.code
+    return res.code == '200' ? JSON.parse(res.body) : {}
 end
 
 def get(route, headers = {})
