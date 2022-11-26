@@ -1,13 +1,12 @@
-function getProjectEntries() {
+function getTasks() {
     console.log('getProjectEntries()');
     return new Promise(resolve => {
         (async () => {
-            var url = `${base_url}/projects/get`;
+            var url = `${base_url}/tasks`;
             url += `?token=${token}`;
-            url += `&id=${user_id}`;
             console.log(url);
             fetch(url).then (response => response.json()).then(data => {
-                console.log('/projects/get', data);
+                console.log('/tasks', data);
                 resolve(data);
             }).catch(err => {
                 console.log(err);
@@ -17,13 +16,13 @@ function getProjectEntries() {
     });
 }
 
-function getProjectTags() {
-    console.log('getProjectTags()');
+function getTaskTags() {
+    console.log('getTaskTags()');
     return new Promise(resolve => {
         (async () => {
-            var url = `${base_url}/projects/tags/get`;
+            var url = `${base_url}/tasks/tags`;
             url += `?token=${token}`;
-            url += `&id=${user_id}`;
+            url += `&task_id=${task_id}`;
             console.log(url);
             fetch(url).then (response => response.json()).then(data => {
                 console.log('/projects/tags/get', data);

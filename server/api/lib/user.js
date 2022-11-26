@@ -52,9 +52,10 @@ module.exports = function (app) {
         }
     }
 
-    app.get('/user/get', (req, res) => {
-        console.log('/user/get', req.query);
+    app.get('/user/:user_id', (req, res) => {
+        console.log('/user/:user_id', req.params, req.query);
         const { token } = req.query;
+        const { user_id } = req.params;
         if (app.locals.isToken(token)) {
             // Success
             res.status(200).send(app.locals.getUser(token));
