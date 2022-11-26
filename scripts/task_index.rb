@@ -1,5 +1,7 @@
 require_relative './api.rb'
 
-puts get('/tasks', {
+body = get('/tasks', {
     :token => API_TOKEN,
 })
+
+puts JSON.pretty_generate(body)

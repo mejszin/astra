@@ -58,6 +58,41 @@ module.exports = function (app) {
         }
     }
 
+    app.locals.newVariable = (task_id, key, value) => {
+        if (task_id in app.locals.task_data) {
+            if (key in app.locals.task_data[task_id].variables) {
+                return false;
+            } else {
+                app.locals.task_data[task_id].variables[key] = value;
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    app.locals.updateVariable = (task_id, key, value) => {
+        if (task_id in app.locals.task_data) {
+            app.locals.task_data[task_id].variables[key] = value;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    app.locals.deleteVariable = (task_id, key) => {
+        if (task_id in app.locals.task_data) {
+            if (key in app.locals.task_data[task_id].variables) {
+                return false;
+            } else {
+                delete app.locals.task_data[task_id].variables[key];
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
     app.get('/tasks', (req, res) => {
         console.log('/tasks', req.query);
         const { token } = req.query;
@@ -148,4 +183,67 @@ module.exports = function (app) {
             res.status(401).send();
         }
     });
+
+    app.get('/tasks/variables', (req, res) => {
+        console.log('/tasks/variables', req.query);
+        const { token, task_id } = req.query;
+        if (app.locals.isToken(token)) {
+            let task = app.locals.getTask(task_id);
+            if (task != undefined) {
+                // Success
+                res.status(200).send(task.variables);
+            } else {
+                // No content
+                res.status(204).send();
+            }
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
+    app.post('/tasks/variables/new', (req, res) => {
+        console.log('/tasks/variables/new', req.query);
+        const { token, task_id, key } = req.query;
+        const value = req.body;
+        if (app.locals.isToken(token)) {
+            let result = app.locals.newVariable(task_id, key, value);
+            app.locals.writeTasks();
+            // Success
+            res.status(200).send({ success: result });
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
+    app.post('/tasks/variables/update', (req, res) => {
+        console.log('/tasks/variables/update', req.query);
+        const { token, task_id, key } = req.query;
+        const value = req.body;
+        if (app.locals.isToken(token)) {
+            let result = app.locals.updateVariable(task_id, key, value);
+            app.locals.writeTasks();
+            // Success
+            res.status(200).send({ success: result });
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
+    app.get('/tasks/variables/delete', (req, res) => {
+        console.log('/tasks/variables/delete', req.query);
+        const { token, task_id, key } = req.query;
+        if (app.locals.isToken(token)) {
+            let result = app.locals.deleteVariable(task_id, key);
+            app.locals.writeTasks();
+            // Success
+            res.status(200).send({ success: result });
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
 }
