@@ -204,10 +204,10 @@ module.exports = function (app) {
 
     app.post('/tasks/variables/new', (req, res) => {
         console.log('/tasks/variables/new', req.query);
-        const { token, task_id, key } = req.query;
-        const value = req.body;
+        const { token, task_id, key, value } = req.query;
+        const body = req.body;
         if (app.locals.isToken(token)) {
-            let result = app.locals.newVariable(task_id, key, value);
+            let result = app.locals.newVariable(task_id, key, value == null ? body : value);
             app.locals.writeTasks();
             // Success
             res.status(200).send({ success: result });
@@ -219,10 +219,10 @@ module.exports = function (app) {
 
     app.post('/tasks/variables/update', (req, res) => {
         console.log('/tasks/variables/update', req.query);
-        const { token, task_id, key } = req.query;
-        const value = req.body;
+        const { token, task_id, key, value } = req.query;
+        const body = req.body;
         if (app.locals.isToken(token)) {
-            let result = app.locals.updateVariable(task_id, key, value);
+            let result = app.locals.updateVariable(task_id, key, value == null ? body : value);
             app.locals.writeTasks();
             // Success
             res.status(200).send({ success: result });

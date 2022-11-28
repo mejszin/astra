@@ -32,7 +32,7 @@ module.exports = function (app) {
                 hash: salt_hash[1],
             },
             data: {
-                pinned_tasks: [],
+                pinned: [],
                 tags: {},
             },
         };

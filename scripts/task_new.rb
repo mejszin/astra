@@ -1,7 +1,7 @@
 require_relative './api.rb'
 
-TITLE = 'Test task'
-DESCRIPTION = 'This is a test task for development purposes'
+TITLE = 'Weeknotes'
+DESCRIPTION = 'These are my weeknotes to be rendered on https://machin.dev/'
 
 puts get('/tasks/new', {
     :token => API_TOKEN,
