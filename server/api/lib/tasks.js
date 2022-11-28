@@ -112,6 +112,21 @@ module.exports = function (app) {
         }
     });
 
+    app.get('/tasks/:task_id', (req, res) => {
+        console.log('/tasks/:task_id', req.query, req.params);
+        const { token } = req.query;
+        const { task_id } = req.params;
+        if (app.locals.isToken(token)) {
+            let user = app.locals.getUser(token);
+            let tasks = app.locals.getUserTasks(user.id);
+            // Success
+            res.status(200).send(tasks[task_id]);
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
     app.get('/tasks/new', (req, res) => {
         console.log('/tasks/new', req.query);
         const { token, title, description } = req.query;
