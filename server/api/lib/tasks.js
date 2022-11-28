@@ -117,10 +117,9 @@ module.exports = function (app) {
         const { token } = req.query;
         const { task_id } = req.params;
         if (app.locals.isToken(token)) {
-            let user = app.locals.getUser(token);
-            let tasks = app.locals.getUserTasks(user.id);
+            let task = app.locals.getTask(task_id);
             // Success
-            res.status(200).send(tasks[task_id]);
+            res.status(200).send(task);
         } else {
             // Unauthorized
             res.status(401).send();
