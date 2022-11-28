@@ -25,7 +25,7 @@ module.exports = function (app) {
             },
             variables: {},
             feed: {},
-        }
+        };
         return true;
     }
 
@@ -46,7 +46,12 @@ module.exports = function (app) {
     app.locals.newFeed = (task_id, data) => {
         if (task_id in app.locals.task_data) {
             let feed_id = app.locals.randomString();
+            let current_time = app.locals.getTimestampInSeconds();
             app.locals.task_data[task_id].feed[feed_id] = data;
+            app.locals.task_data[task_id].feed[feed_id].time = {
+                created: current_time,
+                updated: current_time,
+            };
         }
     }
 

@@ -3,8 +3,11 @@ require_relative './api.rb'
 TASK_ID = 'SkAQWEWb'
 FEED_DATA = {
     'type': 'text',
+    'metadata': {
+        'day': '2022-11-28'
+    },
     'content': {
-        'title': 'This is a test feed item'
+        'title': 'Hello world!'
     }
 }
 

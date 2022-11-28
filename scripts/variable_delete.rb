@@ -1,6 +1,6 @@
 require_relative './api.rb'
 
-TASK_ID = 'SkAQWEWb'
+TASK_ID = 'rysA0WAD'
 
 KEY = 'test_var'
 
