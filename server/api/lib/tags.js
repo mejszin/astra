@@ -12,8 +12,8 @@ module.exports = function (app) {
         }
     }
 
-    app.get('/tags', (req, res) => {
-        console.log('/tags', req.query);
+    app.get('/users/tags/new', (req, res) => {
+        console.log('/users/tags/new', req.query);
         const { token, name, color } = req.query;
         if (app.locals.isToken(token)) {
             app.locals.newTag(token, name, color);
