@@ -34,6 +34,13 @@ var getTasks = () => {
     });
 }
 
+var getUserTags = () => {
+    console.log('getUserTags()');
+    return new Promise(resolve => {
+        resolve({});
+    });
+};
+
 // function getTaskTags() {
 //     console.log('getTaskTags()');
 //     return new Promise(resolve => {

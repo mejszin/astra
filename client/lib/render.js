@@ -1,4 +1,4 @@
-function selectEntry(div) {
+function selectTask(div) {
     var entries = document.getElementsByClassName('entry');
     for (var i = 0; i < entries.length; i++) {
       entries[i].classList.remove('selected');
@@ -6,37 +6,41 @@ function selectEntry(div) {
     div.classList.add('selected');
 }
 
-function addEntryListItem(entry, tags = {}) {
+function addTaskListItem(entry, tags = {}) {
     let parent = document.getElementById('entries');
     let div = createDiv(['box', 'entry', 'm-2', 'px-3', 'pt-2', 'pb-3']);
     let element;
     div.appendChild(createP(`#${entry.id}`, ['caption', 'is-size-7']));
-    div.appendChild(createP(entry.title, ['entries-item-title', 'is-size-6']));
+    div.appendChild(createP(entry.content.title, ['entries-item-title', 'is-size-6']));
     let span = createSpan(['tag-span', 'mt-2']);
     div.appendChild(span);
-    entry.tags.forEach(tag_id => {
-      element = createDiv(['tag-square', 'mr-2']);
-      element.style.backgroundColor = tags[tag_id][1];
-      span.appendChild(element);
-    });
+//  entry.tags.forEach(tag_id => {
+//    element = createDiv(['tag-square', 'mr-2']);
+//    element.style.backgroundColor = tags[tag_id][1];
+//    span.appendChild(element);
+//  });
     div.onclick = () => {
       entry_id = entry.id;
-      selectEntry(div);
-      renderEntry(entry, tags);
+      selectTask(div);
+      renderTask(entry, tags);
     };
     parent.appendChild(div);
 }
 
-function renderEntryList() {
+function renderTaskList() {
   document.getElementById('entries').innerHTML = '';
-  getProjectTags().then(tags => {
-    getProjectEntries().then(entries => {
-      for (var entry_id in entries) {
-        console.log('entry_id=', entry_id);
-        if (!('id' in entries[entry_id])) { entries[entry_id].id = entry_id };
-        console.log('entry_data=', entries[entry_id]);
-        addEntryListItem(entries[entry_id], tags);
-      }
+  getUserTags().then(tags => {
+    getTasks().then(tasks => {
+      Object.keys(tasks).forEach(task_id => {
+        console.log('task_data=', tasks[task_id]);
+        addTaskListItem(tasks[task_id]);
+      });
+      // for (var entry_id in entries) {
+      //   console.log('entry_id=', entry_id);
+      //   if (!('id' in entries[entry_id])) { entries[entry_id].id = entry_id };
+      //   console.log('entry_data=', entries[entry_id]);
+      //   addEntryListItem(entries[entry_id], tags);
+      // }
     });
   });
 }
@@ -82,7 +86,13 @@ function renderVariables(variables) {
       tr.appendChild(td);
       // Value
       td = createElement('td', ['is-small-text']);
-      td.innerText = Array.isArray(variables[key]) ? variables[key].join(', ') : variables[key];
+      if (Array.isArray(variables[key])) {
+        td.innerText = variables[key].join(', ');
+      } else if (typeof variables[key] === 'object') {
+        td.innerText = JSON.stringify(variables[key]);
+      } else {
+        td.innerText = variables[key];
+      }
       tr.appendChild(td);
     });
   } else {
@@ -144,6 +154,21 @@ function renderFeedImage(item) {
   return container;
 }
 
+function renderFeedText(item) {
+  let container = createContainer(item);
+  let div = container.getElementsByClassName('message-body')[0];
+  div.innerHTML += item.content.text + '<br><p class="is-size-7">' + (new Date(item.time.created * 1000)).toLocaleTimeString() + '</p>';
+  return container;
+}
+
+function renderFeedGpx(item) {
+  let container = createContainer(item);
+  let div = container.getElementsByClassName('message-body')[0];
+  div.innerHTML += item.content.basename + '<br><p class="is-size-7">' + (new Date(item.time.created * 1000)).toLocaleTimeString() + '</p>';
+  // item.content.uri
+  return container;
+}
+
 function renderFeedTodo(item) {
   let container = createContainer(item);
   let div = container.getElementsByClassName('message-body')[0];
@@ -166,7 +191,7 @@ function renderFeedTodo(item) {
   return container;
 }
 
-function renderEntry(entry, tags = {}) {
+function renderTask(entry, tags = {}) {
   let element, span, div;
   console.log('renderEntry()', entry);
   // Header
@@ -179,7 +204,7 @@ function renderEntry(entry, tags = {}) {
   element = createP('#' + entry.id, ['id']);
   span.appendChild(element);
   // Header > Span > Title
-  element = createP(entry.title);
+  element = createP(entry.content.title);
   span.appendChild(element);
   // Contents
   let parent = document.getElementById('entry-view');
@@ -212,46 +237,45 @@ function renderEntry(entry, tags = {}) {
   element = createP('#' + entry.id, ['caption', 'pr-2']);
   span.appendChild(element);
   // Contents > Title span > Title
-  element = createP(entry.title, ['bold']);
+  element = createP(entry.content.title, ['bold']);
   span.appendChild(element);
   // Contents > Creation date
   span = createSpan(['entry-creation-date', 'my-4']);
   parent.appendChild(span);
   element = createI('', ['fa', 'fa-calendar-days', 'pr-2']);
   span.appendChild(element);
-  element = createP((new Date(entry.times.created * 1000)).toLocaleDateString());
+  element = createP((new Date(entry.time.created * 1000)).toLocaleDateString());
   span.appendChild(element);
   // Contents > Description
   element = createP('Description', ['caption', 'mb-2']);
   parent.appendChild(element);
-  element = createP(entry.description, ['entry-description', 'p-4', 'mb-2']);
+  element = createP(entry.content.description, ['entry-description', 'p-4', 'mb-2']);
   parent.appendChild(element);
   // Contents > Tags
-  entry.tags.forEach(tag_id => {
-    span = createSpan(['tag-span']);
-    parent.appendChild(span);
-    element = createDiv(['tag-square', 'mr-2']);
-    element.style.backgroundColor = tags[tag_id][1];
-    span.appendChild(element);
-    element = createP(tags[tag_id][0]);
-    span.appendChild(element);
-  });
+  //entry.tags.forEach(tag_id => {
+  //  span = createSpan(['tag-span']);
+  //  parent.appendChild(span);
+  //  element = createDiv(['tag-square', 'mr-2']);
+  //  element.style.backgroundColor = tags[tag_id][1];
+  //  span.appendChild(element);
+  //  element = createP(tags[tag_id][0]);
+  //  span.appendChild(element);
+  //});
   // Contents > Feed
   element = createP('Feed', ['caption', 'my-2']);
   parent.appendChild(element);
   div = createDiv(['entry-feed']);
   parent.appendChild(div);
   // Contents > Feed > Items
-  let indexed_items = [];
-  let index = 0;
-  let indexed_item;
-  entry.feed.forEach(item => {
-    indexed_item = item;
-    item.index = index;
-    indexed_items.push(indexed_item);
-    index += 1;
-  });
-  indexed_items.reverse().forEach(item => {
+  Object.keys(entry.feed).reverse().forEach(feed_id => {
+    let item = entry.feed[feed_id];
+    console.log(item);
+    if (item.type == 'text') {
+      div.appendChild(renderFeedText(item));
+    }
+    if (item.type == 'gpx') {
+      div.appendChild(renderFeedGpx(item));
+    }
     if (item.type == 'log') {
       div.appendChild(renderFeedLog(item));
     }

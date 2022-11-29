@@ -23,6 +23,7 @@ module.exports = function (app) {
                 title: title,
                 description: description,
             },
+            tags: [],
             variables: {},
             feed: {},
         };
@@ -93,6 +94,15 @@ module.exports = function (app) {
             } else {
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+
+    app.locals.updateTags = (task_id, tags) => {
+        if (task_id in app.locals.task_data) {
+            app.locals.task_data[task_id].tags = tags;
+            return true;
         } else {
             return false;
         }
@@ -197,6 +207,39 @@ module.exports = function (app) {
             app.locals.writeTasks();
             // Success
             res.status(200).send({});
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
+    app.get('/tasks/tags', (req, res) => {
+        console.log('/tasks/tags', req.query);
+        const { token, task_id } = req.query;
+        if (app.locals.isToken(token)) {
+            let task = app.locals.getTask(task_id);
+            if (task != undefined) {
+                // Success
+                res.status(200).send(task.tags);
+            } else {
+                // No content
+                res.status(204).send();
+            }
+        } else {
+            // Unauthorized
+            res.status(401).send();
+        }
+    });
+
+    app.post('/tasks/tags/update', (req, res) => {
+        console.log('/tasks/tags/update', req.query);
+        const { token, task_id } = req.query;
+        const tags = req.body;
+        if (app.locals.isToken(token)) {
+            let result = app.locals.updateTags(task_id, tags);
+            app.locals.writeTasks();
+            // Success
+            res.status(200).send({ success: result });
         } else {
             // Unauthorized
             res.status(401).send();
