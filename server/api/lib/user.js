@@ -51,19 +51,6 @@ module.exports = function (app) {
             return undefined;
         }
     }
-
-    app.get('/user/:user_id', (req, res) => {
-        console.log('/user/:user_id', req.params, req.query);
-        const { token } = req.query;
-        const { user_id } = req.params;
-        if (app.locals.isToken(token)) {
-            // Success
-            res.status(200).send(app.locals.getUser(token));
-        } else {
-            // Unauthorized
-            res.status(401).send();
-        }
-    });
     
     app.get('/user/login', async (req, res) => {
         console.log('/user/login', req.query);
@@ -98,6 +85,19 @@ module.exports = function (app) {
         } else {
             // Bad request
             res.status(400).send();
+        }
+    });
+
+    app.get('/user/:user_id', (req, res) => {
+        console.log('/user/:user_id', req.params, req.query);
+        const { token } = req.query;
+        const { user_id } = req.params;
+        if (app.locals.isToken(token)) {
+            // Success
+            res.status(200).send(app.locals.getUser(token));
+        } else {
+            // Unauthorized
+            res.status(401).send();
         }
     });
 }

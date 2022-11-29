@@ -1,4 +1,4 @@
-function getUser() {
+var getUser = () => {
     console.log('getUser()');
     return new Promise(resolve => {
         (async () => {
@@ -16,23 +16,23 @@ function getUser() {
     });
 }
 
-// function getTasks() {
-//     console.log('getProjectEntries()');
-//     return new Promise(resolve => {
-//         (async () => {
-//             var url = `${base_url}/tasks`;
-//             url += `?token=${token}`;
-//             console.log(url);
-//             fetch(url).then (response => response.json()).then(data => {
-//                 console.log('/tasks', data);
-//                 resolve(data);
-//             }).catch(err => {
-//                 console.log(err);
-//                 resolve({});
-//             });
-//         })()
-//     });
-// }
+var getTasks = () => {
+    console.log('getTasks()');
+    return new Promise(resolve => {
+        (async () => {
+            var url = `${base_url}/tasks`;
+            url += `?token=${token}`;
+            console.log(url);
+            fetch(url).then (response => response.json()).then(data => {
+                console.log('/tasks', data);
+                resolve(data);
+            }).catch(err => {
+                console.log(err);
+                resolve({});
+            });
+        })()
+    });
+}
 
 // function getTaskTags() {
 //     console.log('getTaskTags()');

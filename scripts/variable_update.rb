@@ -1,9 +1,11 @@
 require_relative './api.rb'
 
-TASK_ID = 'SkAQWEWb'
+TASK_ID = 'rysA0WAD'
 
-KEY = 'test_var'
-VALUE = ['abc', 'def', 'ghi']
+KEY = 'weeknote_titles'
+VALUE = {
+    0 => 'the zeroth week',
+}
 
 puts post('/tasks/variables/update', {
     :token => API_TOKEN,

@@ -1,7 +1,7 @@
 require_relative './api.rb'
 
-TASK_ID = 'SkAQWEWb'
-FEED_ID = 'LM6pyps7'
+TASK_ID = 'rysA0WAD'
+FEED_ID = 'Il3rMfBG'
 
 puts get('/tasks/feed/delete', {
     :token => API_TOKEN,
