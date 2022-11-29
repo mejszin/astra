@@ -2,8 +2,7 @@ require_relative './api.rb'
 
 TASK_ID = 'rysA0WAD'
 
-body = get("/task/#{TASK_ID}", {
+puts get('/tasks/tags', {
     :token => API_TOKEN,
+    :task_id => TASK_ID,
 })
-
-puts JSON.pretty_generate(body)
