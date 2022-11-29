@@ -7,12 +7,12 @@ module.exports = function (app) {
             };
         })
         return exists;
-    };
+    }
 
     app.locals.isToken = (token) => {
         return (token in app.locals.user_data);
     }
-    
+
     app.locals.isUser = (user_id) => {
         // TODO:
         return true;
@@ -51,9 +51,9 @@ module.exports = function (app) {
             return undefined;
         }
     }
-    
-    app.get('/user/login', async (req, res) => {
-        console.log('/user/login', req.query);
+
+    app.get('/users/login', async (req, res) => {
+        console.log('/users/login', req.query);
         const { username, password } = req.query;
         if (app.locals.usernameExists(username)) {
             var token = await app.locals.findCredentials(username, password);
@@ -69,9 +69,9 @@ module.exports = function (app) {
             res.status(401).send();
         }
     });
-    
-    app.get('/user/new', async (req, res) => {
-        console.log('/user/new', req.query);
+
+    app.get('/users/new', async (req, res) => {
+        console.log('/users/new', req.query);
         const { username, password } = req.query;
         if ((username != undefined) && (password != undefined)) {
             var token = await app.locals.newUser(username, password);
