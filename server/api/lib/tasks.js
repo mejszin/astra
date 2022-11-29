@@ -122,8 +122,8 @@ module.exports = function (app) {
         }
     });
 
-    app.get('/tasks/:task_id', (req, res) => {
-        console.log('/tasks/:task_id', req.query, req.params);
+    app.get('/task/:task_id', (req, res) => {
+        console.log('/task/:task_id', req.query, req.params);
         const { token } = req.query;
         const { task_id } = req.params;
         if (app.locals.isToken(token)) {
