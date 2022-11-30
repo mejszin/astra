@@ -2,7 +2,7 @@ require_relative './api.rb'
 
 TASK_ID = 'rysA0WAD'
 
-TAGS = [0, 1, 2]
+TAGS = ['DWFFoRFV', 'E3eICQjh']
 
 puts post('/tasks/tags/update', {
     :token => API_TOKEN,

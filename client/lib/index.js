@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const ini = require('ini');
 
-const debug = true;
+const debug = false;
 
 const title = 'astra';
 

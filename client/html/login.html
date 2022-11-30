@@ -55,7 +55,7 @@
     function attemptLogin(username, password) {
       return new Promise(resolve => {
         (async () => {
-          var url = `${base_url}/user/login?username=${username}&password=${password}`;
+          var url = `${base_url}/users/login?username=${username}&password=${password}`;
           console.log(url);
           fetch(url).then(response => response.status == 200 ? response.json() : { token: null }).then(data => {
               console.log('/user/login', data);
@@ -88,14 +88,12 @@
         })
       }
     }
-
-    login('Louis', 'PrettyStock420!')
   </script>
 
   <body>
     <div class="columns is-mobile">
       <div class="column is-half logo">
-        <!--<img src="../data/art.jpg">-->
+        <img src="../data/art.jpg">
       </div>
       <div class="column is-half form">
         <form>

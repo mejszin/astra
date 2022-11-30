@@ -37,7 +37,7 @@ var getTasks = () => {
 var getUserTags = () => {
     console.log('getUserTags()');
     return new Promise(resolve => {
-        resolve({});
+        getUser().then(user => resolve(user.data.tags));
     });
 };
 
