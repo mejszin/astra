@@ -27,6 +27,7 @@ module.exports = function (app) {
             variables: {},
             feed: {},
         };
+        app.locals.user_data[user_id].data.tasks.push(task_id);
         return true;
     }
 
@@ -40,6 +41,8 @@ module.exports = function (app) {
 
     app.locals.deleteTasks = (task_id) => {
         if (task_id in app.locals.task_data) {
+            let user_id = app.locals.task_data[task_id].owner;
+            app.locals.user_data[user_id].data.tasks -= [task_id];
             delete app.locals.task_data[task_id];
         }
     }
@@ -143,6 +146,7 @@ module.exports = function (app) {
             let user = app.locals.getUser(token);
             app.locals.newTask(user.id, title, description);
             app.locals.writeTasks();
+            app.locals.writeUsers();
             // Success
             res.status(200).send({});
         } else {
@@ -157,6 +161,7 @@ module.exports = function (app) {
         if (app.locals.isToken(token)) {
             app.locals.deleteTask(task_id);
             app.locals.writeTasks();
+            app.locals.writeUsers();
             // Success
             res.status(200).send({});
         } else {
