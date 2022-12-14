@@ -1,11 +1,14 @@
 module.exports = function (app) {
     app.locals.getUserTasks = (user_id) => {
         result = [];
-        Object.keys(app.locals.task_data).forEach(task_id => {
-            if (app.locals.task_data[task_id].owner == user_id) {
-                result.push(app.locals.task_data[task_id]);
-            }
-        });
+        app.locals.user_data[user_id].data.tasks.forEach(task_id) => {
+            result.push(app.locals.task_data[task_id]);
+        }
+        // Object.keys(app.locals.task_data).forEach(task_id => {
+        //     if (app.locals.task_data[task_id].owner == user_id) {
+        //         result.push(app.locals.task_data[task_id]);
+        //     }
+        // });
         return result;
     }
     
